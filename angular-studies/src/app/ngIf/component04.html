@@ -1,0 +1,7 @@
+<br>
+<button (click)="toggleShowSquare()" [ngSwitch]="show">
+    <div *ngSwitchCase="true">Ocultar quadrado</div>
+    <div *ngSwitchDefault>Mostrar quadrado</div>
+</button>
+
+<div class="square" *ngIf="show"></div>
