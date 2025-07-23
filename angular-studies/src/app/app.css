@@ -1,0 +1,21 @@
+footer {
+    text-align: center;
+    background-color: #F8F9FA;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+nav {
+    margin-bottom: 1rem;
+}
+
+p {
+    margin: 0px;
+}
+
+main {
+    min-height: 84.9vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
