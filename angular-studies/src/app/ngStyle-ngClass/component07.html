@@ -1,0 +1,9 @@
+<h1 (click)="toggleCondition()" [ngStyle]="{'color': condition ? 'green' : 'red'}">Aprendendo a diretiva ngStyle</h1>
+
+<ul>
+    <li *ngFor="let item of list" [ngStyle]="{color: item === 'aprovado' ? 'green' : 'red'}">{{item}}</li>
+</ul>
+
+<ul>
+    <li *ngFor="let item of list" [ngClass]="item === 'aprovado' ? 'greenFont' : 'redFont'">{{item}}</li>
+</ul>

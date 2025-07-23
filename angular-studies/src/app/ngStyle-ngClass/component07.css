@@ -1,0 +1,13 @@
+h1 {
+    cursor: pointer;
+}
+
+.greenFont{
+    color: green;
+    font-size: large;
+}
+
+.redFont{
+    color: red;
+    font-size: large;
+}
