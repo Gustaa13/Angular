@@ -10,6 +10,8 @@ import { Person } from 'src/app/model/Person';
 })
 export class Component11 {
 
+  STORAGE_KEY: string = 'persons';
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     age: new FormControl(Number.NaN, [Validators.required, Validators.min(0), Validators.max(120)]),
@@ -18,7 +20,8 @@ export class Component11 {
 
   btnRegister: boolean = true;
 
-  persons: Person[] = [];
+  personsStorage = localStorage.getItem(this.STORAGE_KEY);
+  persons: Person[] = this.personsStorage ? JSON.parse(this.personsStorage) as Person[] : [];
 
   selectPersonIndex: number = -1; 
 
@@ -27,6 +30,8 @@ export class Component11 {
     this.persons.push(this.form.value as Person);
 
     this.form.reset();
+
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.persons));
 
     //console.table(this.persons);
   }
