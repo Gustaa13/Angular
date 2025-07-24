@@ -1,11 +1,62 @@
+<form [formGroup]="form">
 
-<form action="">
-    <input type="text" placeholder="Nome" class="form-control">
-    <input type="number" placeholder="Idade" class="form-control">
-    <input type="text" placeholder="Cidade" class="form-control">
+    @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+        <p class="alert alert-warning">O campo nome é obrigatório!</p>
+    } 
+    @if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
+        <p class="alert alert-warning">O campo nome precisa de no mínimo 3 caracteres!</p>
+    }
+    <input type="text" formControlName="name" placeholder="Nome" class="form-control">
 
-    <input type="button" value="Cadastrar" class="btn btn-primary">
-    <input type="button" value="Alterar" class="btn btn-primary">
-    <input type="button" value="Remover" class="btn btn-primary">
-    <input type="button" value="Cancelar" class="btn btn-primary">
+    @if (form.get('age')?.hasError('required') && form.get('age')?.touched) {
+        <p class="alert alert-warning">O campo idade é obrigatório!</p>
+    } 
+    @if (form.get('age')?.hasError('min') && form.get('age')?.touched) {
+        <p class="alert alert-warning">O campo idade não pode ser preenchido com valor inferior a 0!</p>
+    }
+    @if (form.get('age')?.hasError('max') && form.get('age')?.touched) {
+        <p class="alert alert-warning">O campo idade não pode ser preenchido com valor superior a 120!</p>
+    } 
+    <input type="number" formControlName="age" placeholder="Idade" class="form-control">
+
+    @if (form.get('city')?.hasError('required') && form.get('city')?.touched) {
+        <p class="alert alert-warning">O campo cidade é obrigatório!</p>
+    } 
+    @if (form.get('city')?.hasError('minlength') && form.get('city')?.touched) {
+        <p class="alert alert-warning">O campo cidade precisa de no mínimo 3 caracteres!</p>
+    }
+    <input type="text" formControlName="city" placeholder="Cidade" class="form-control">
+
+    @if (btnRegister) {
+        <input type="button" value="Cadastrar" (click)="registerPerson()" class="btn btn-primary" [disabled]="form.invalid" >
+    } @else {
+        <input type="button" value="Alterar" class="btn btn-primary" [disabled]="form.invalid" (click)="alterPerson()">
+        <input type="button" value="Remover" class="btn btn-primary" (click)="removePerson()">
+        <input type="button" value="Cancelar" class="btn btn-primary" (click)="cancelPerson()">
+    }
+    
 </form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Cidade</th>
+            <th>Selecionar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (p of persons; track $index) {
+            <tr>
+                <td>{{$index + 1}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>{{p.city}}</td>
+                <td><button class="btn btn-primary" (click)="selectPerson($index)">Selecionar</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

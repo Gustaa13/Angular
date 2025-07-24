@@ -1,5 +1,5 @@
 form {
-    min-width: 35rem;
+    width: 35rem;
     margin: 5rem auto;
     text-align: center;
 }
@@ -10,4 +10,12 @@ input {
 
 input[type="button"] {
     margin: 0px 0.5rem;
+}
+
+tr {
+    text-align: center;
+}
+
+td {
+    vertical-align: middle;
 }
