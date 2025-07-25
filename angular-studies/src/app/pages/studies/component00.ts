@@ -9,11 +9,12 @@ import { Component07 } from '../../components/ngStyle-ngClass/component07';
 import { Component08 } from '../../components/controlFlow/component08';
 import { Component09 } from '../../components/formsModule/component09';
 import { Component10 } from '../../components/reactiveForms/component10';
+import { Component12 } from "src/app/components/pipe/component12";
 
 
 @Component({
   selector: 'app-component00',
-  imports: [Component01, Component02, Component03, Component04, Component05, Component06, Component07, Component08, Component09, Component10],
+  imports: [Component01, Component02, Component03, Component04, Component05, Component06, Component07, Component08, Component09, Component10, Component12],
   templateUrl: './component00.html',
   styleUrl: './component00.css'
 })

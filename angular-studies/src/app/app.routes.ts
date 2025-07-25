@@ -19,5 +19,11 @@ export const routes: Routes = [
         path: 'primeiro-projeto',
         title: 'Primeiro projeto',
         loadComponent: () => import('./pages/firstProject/component11').then(m => m.Component11)
+    }, 
+
+    {
+        path: 'segundo-projeto',
+        title: 'Segundo projeto',
+        loadComponent: () => import('./pages/secondProject/component13').then(m => m.Component13)
     }
 ];

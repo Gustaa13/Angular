@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Person } from 'src/app/model/Person';
+import { Person } from 'src/app/models/Person';
 
 @Component({
   selector: 'app-component11',
@@ -58,7 +58,7 @@ export class Component11 {
   removePerson = () => {
     this.persons.splice(this.selectPersonIndex, 1);
 
-     this.cancelPerson();
+    this.cancelPerson();
   }
 
   cancelPerson = () => {
