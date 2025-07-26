@@ -1,7 +1,27 @@
 <form [formGroup]="form">
-    <input type="text" class="form-control" formControlName="id" readonly >
+    <!--<input type="text" class="form-control" formControlName="id" readonly >-->
+
+    @if(nameExists) {
+        <p class="alert alert-danger">Não é possível cadastrar (ou alterar para) um nome de produto que já existe.</p>
+    }
+
+    @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+        <p class="alert alert-warning">O campo nome é obrigatório.</p>
+    } @else if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
+        <p class="alert alert-warning">O campo nome precisa no mínimo de 3 caracteres.</p>
+    } @else if (form.get('name')?.hasError('maxlength') && form.get('name')?.touched) {
+        <p class="alert alert-warning">O campo nome pode ter no máximo 50 caracteres.</p>
+    }
     <input type="text"   class="form-control" formControlName="name" placeholder="Nome">
-    <input type="number" class="form-control" formControlName="price" placeholder="Valor">
+
+    @if (form.get('price')?.hasError('required') && form.get('price')?.touched) {
+        <p class="alert alert-warning">O campo valor é obrigatório.</p>
+    } @else if (form.get('price')?.hasError('min') && form.get('price')?.touched) {
+        <p class="alert alert-warning">O campo preço precisa ser preenchido com no mínimo 1 centavo.</p>
+    } @else if (form.get('price')?.hasError('max') && form.get('price')?.touched) {
+        <p class="alert alert-warning">O campo preço pode ser preenchido com no máximo 1 milhão.</p>
+    }
+    <input type="number" class="form-control" formControlName="price" placeholder="Preço">
 
     @if (btnRegister) {
         <input (click)="registerProduct()" type="button" class="btn btn-primary" value="Cadastrar" [disabled]="form.invalid">
@@ -18,7 +38,7 @@
         <tr>
             <th>#</th>
             <th>Nome</th>
-            <th>Valor</th>
+            <th>Preço</th>
             <th>Selecionar</th>
         </tr>
     </thead>

@@ -16,11 +16,13 @@ export class Component13 {
 
   btnRegister: boolean = true;
 
+  nameExists: boolean = false;
+
   form = new FormGroup({
 
     id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-    price: new FormControl(Number.NaN, [Validators.required, Validators.min(1)])
+    price: new FormControl<number | null>(null, [Validators.required, Validators.min(0.01), Validators.max(1000000)])
 
   });
 
@@ -38,6 +40,9 @@ export class Component13 {
     this.form.patchValue({
       id: this.products.length - 1 >= 0 ? (parseInt(this.products[this.products.length - 1].id) + 1).toString() : '1'
     });
+
+    this.checkNameExists();
+    if(this.nameExists) return;
 
     this.service.register(this.form.value as Product).subscribe(r => {
 
@@ -60,6 +65,9 @@ export class Component13 {
 
   alterProduct = () => {
     this.service.alter(this.form.value as Product).subscribe(r => {
+
+      this.checkNameExists();
+      if(this.nameExists) return;
 
       let index = this.products.findIndex(obj => this.form.value.id === obj.id);
 
@@ -85,5 +93,13 @@ export class Component13 {
   cancelPerson = () => {
     this.form.reset();
     this.btnRegister = true;
+  }
+
+  checkNameExists = () => {
+    if(this.products.some(p => p.name.toLowerCase() === this.form.value.name?.toLowerCase())) {
+      this.nameExists = true;
+    } else {
+      this.nameExists = false;
+    }
   }
 }

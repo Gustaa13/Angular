@@ -4,7 +4,10 @@
         <p class="alert alert-warning">O campo nome é obrigatório!</p>
     } 
     @if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
-        <p class="alert alert-warning">O campo nome precisa de no mínimo 3 caracteres!</p>
+        <p class="alert alert-warning">O campo nome precisa no mínimo de 3 caracteres!</p>
+    } 
+    @if (form.get('name')?.hasError('onlyLetters') && form.get('name')?.touched) {
+        <p class="alert alert-warning">O campo nome aceita somente letras.</p>
     }
     <input type="text" formControlName="name" placeholder="Nome" class="form-control">
 
@@ -24,6 +27,9 @@
     } 
     @if (form.get('city')?.hasError('minlength') && form.get('city')?.touched) {
         <p class="alert alert-warning">O campo cidade precisa de no mínimo 3 caracteres!</p>
+    }
+    @if (form.get('city')?.hasError('onlyLetters') && form.get('city')?.touched) {
+        <p class="alert alert-warning">O campo cidade aceita somente letras.</p>
     }
     <input type="text" formControlName="city" placeholder="Cidade" class="form-control">
 

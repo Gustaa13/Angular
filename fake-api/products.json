@@ -9,6 +9,11 @@
       "id": "2",
       "name": "iPhone 15",
       "price": 7000
+    },
+    {
+      "id": "3",
+      "name": "Iphone 27",
+      "price": 5664
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Person } from 'src/app/models/Person';
+import { onlyLetters } from 'src/app/validators/onlyLetters';
 
 @Component({
   selector: 'app-component11',
@@ -13,9 +14,9 @@ export class Component11 {
   STORAGE_KEY: string = 'persons';
 
   form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    age: new FormControl(Number.NaN, [Validators.required, Validators.min(0), Validators.max(120)]),
-    city: new FormControl('', [Validators.required, Validators.minLength(3)])
+    name: new FormControl('', [Validators.required, Validators.minLength(3), onlyLetters]),
+    age: new FormControl<number | null>(null, [Validators.required, Validators.min(0), Validators.max(120)]),
+    city: new FormControl('', [Validators.required, Validators.minLength(3), onlyLetters])
   });
 
   btnRegister: boolean = true;
