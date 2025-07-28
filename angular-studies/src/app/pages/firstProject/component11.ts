@@ -59,6 +59,8 @@ export class Component11 {
   removePerson = () => {
     this.persons.splice(this.selectPersonIndex, 1);
 
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.persons));
+
     this.cancelPerson();
   }
 
