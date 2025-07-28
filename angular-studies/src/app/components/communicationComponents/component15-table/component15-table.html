@@ -1,0 +1,15 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (item of array; track $index) {
+            <tr>
+                <td>{{item}}</td>
+            </tr>   
+        }
+    </tbody>
+</table>

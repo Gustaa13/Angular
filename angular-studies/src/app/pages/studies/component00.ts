@@ -10,11 +10,13 @@ import { Component08 } from '../../components/controlFlow/component08';
 import { Component09 } from '../../components/formsModule/component09';
 import { Component10 } from '../../components/reactiveForms/component10';
 import { Component12 } from "src/app/components/pipe/component12";
+import { Component14 } from "src/app/components/angularMaterial/component14";
+import { Component15 } from "src/app/components/communicationComponents/component15/component15";
 
 
 @Component({
   selector: 'app-component00',
-  imports: [Component01, Component02, Component03, Component04, Component05, Component06, Component07, Component08, Component09, Component10, Component12],
+  imports: [Component01, Component02, Component03, Component04, Component05, Component06, Component07, Component08, Component09, Component10, Component12, Component14, Component15],
   templateUrl: './component00.html',
   styleUrl: './component00.css'
 })
