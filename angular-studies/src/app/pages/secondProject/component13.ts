@@ -12,7 +12,11 @@ import { ProductService } from 'src/app/services/productService';
 })
 export class Component13 {
   
-  products: Product[] = [];
+  showAllProducts: boolean = true;
+  allProducts: Product[] = [];
+  filterProducts: Product[] = [];
+
+  search = new FormControl('', [Validators.required]);
 
   btnRegister: boolean = true;
 
@@ -33,12 +37,12 @@ export class Component13 {
   }
 
   getProducts = () => {
-    this.service.select().subscribe(r => {this.products = r});
+    this.service.select().subscribe(r => {this.allProducts = r});
   }
 
   registerProduct = () => {
     this.form.patchValue({
-      id: this.products.length - 1 >= 0 ? (parseInt(this.products[this.products.length - 1].id) + 1).toString() : '1'
+      id: this.allProducts.length - 1 >= 0 ? (parseInt(this.allProducts[this.allProducts.length - 1].id) + 1).toString() : '1'
     });
 
     this.checkNameExists();
@@ -46,32 +50,37 @@ export class Component13 {
 
     this.service.register(this.form.value as Product).subscribe(r => {
 
-      this.products.push(r);
+      this.allProducts.push(r);
 
       this.form.reset();
     });
   }
 
-  select = (index: number) => {
+  select = (id: string) => {
+
+    let index = this.allProducts.findIndex(p => id === p.id);
 
     this.form.setValue({
-      id: this.products[index].id,
-      name: this.products[index].name,
-      price: this.products[index].price
+      id: this.allProducts[index].id,
+      name: this.allProducts[index].name,
+      price: this.allProducts[index].price
     });
 
     this.btnRegister = false;
   }
 
   alterProduct = () => {
-    this.service.alter(this.form.value as Product).subscribe(r => {
 
+    let index = this.allProducts.findIndex(p => this.form.value.id === p.id);
+
+    if(this.form.value.name?.toLowerCase() !== this.allProducts[index].name.toLowerCase()) {
       this.checkNameExists();
       if(this.nameExists) return;
+    }
 
-      let index = this.products.findIndex(obj => this.form.value.id === obj.id);
-
-      this.products[index] = r;
+    this.service.alter(this.form.value as Product).subscribe(r => {
+      
+      this.allProducts[index] = r;
       
       this.cancelPerson();
     });
@@ -81,9 +90,9 @@ export class Component13 {
     
     this.service.remove(this.form.value.id ? this.form.value.id : '').subscribe(() => {
       
-      let removedIndex = this.products.findIndex(obj => obj.id === this.form.value.id);
+      let removedIndex = this.allProducts.findIndex(obj => obj.id === this.form.value.id);
 
-      this.products.splice(removedIndex, 1);
+      this.allProducts.splice(removedIndex, 1);
 
       this.cancelPerson();
     });
@@ -93,13 +102,26 @@ export class Component13 {
   cancelPerson = () => {
     this.form.reset();
     this.btnRegister = true;
+    this.nameExists = false;
   }
 
   checkNameExists = () => {
-    if(this.products.some(p => p.name.toLowerCase() === this.form.value.name?.toLowerCase())) {
+    if(this.allProducts.some(p => p.name.toLowerCase() === this.form.value.name?.toLowerCase())) {
       this.nameExists = true;
     } else {
       this.nameExists = false;
     }
+  }
+
+  clearSearch = () => {
+    this.search.setValue('');
+    this.showAllProducts = true;
+  }
+
+  research = () => {
+
+    this.filterProducts = this.allProducts.filter(p => p.name.toLowerCase().trim().includes(this.search.value?.toLowerCase().trim() ?? ''));
+
+    this.showAllProducts = false;
   }
 }

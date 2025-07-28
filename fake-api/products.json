@@ -7,13 +7,18 @@
     },
     {
       "id": "2",
-      "name": "iPhone 15",
+      "name": "iPhone 27",
       "price": 7000
     },
     {
       "id": "3",
-      "name": "Iphone 27",
+      "name": "Iphone 15",
       "price": 5664
+    },
+    {
+      "id": "4",
+      "name": "M13",
+      "price": 800
     }
   ]
 }

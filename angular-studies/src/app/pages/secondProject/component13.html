@@ -33,6 +33,12 @@
      
 </form>
 
+<form action="">
+    <input type="text" [formControl]="search" class="form-control" placeholder="Insira sua pesquisa" [readOnly]="!showAllProducts">
+    <input type="button" (click)="research()" class="btn btn-primary" value="Filtrar" [disabled]="search.invalid">
+    <input type="button" (click)="clearSearch()" class="btn btn-primary" value="Limpar">
+</form>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -44,12 +50,12 @@
     </thead>
 
     <tbody>
-        @for (p of products; track $index) {
+        @for (p of (showAllProducts) ? allProducts : filterProducts; track $index) {
             <tr>
                 <td>{{$index + 1}}</td>
                 <td>{{p.name}}</td>
                 <td>{{p.price | currency:'BRL'}}</td>
-                <td><button (click)="select($index)" class="btn btn-primary">Selecionar</button></td>
+                <td><button (click)="select(p.id)" class="btn btn-primary">Selecionar</button></td>
             </tr>
         }
     </tbody>
