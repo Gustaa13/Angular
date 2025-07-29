@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { routeGuard } from './authentication/route-guard';
 
 export const routes: Routes = [
 
@@ -18,12 +19,19 @@ export const routes: Routes = [
     {
         path: 'primeiro-projeto',
         title: 'Primeiro projeto',
-        loadComponent: () => import('./pages/firstProject/component11').then(m => m.Component11)
+        loadComponent: () => import('./pages/firstProject/component11').then(m => m.Component11),
+        canActivate: [routeGuard]
     }, 
 
     {
         path: 'segundo-projeto',
         title: 'Segundo projeto',
         loadComponent: () => import('./pages/secondProject/component13').then(m => m.Component13)
+    },
+
+    {
+        path: '**', 
+        title: 'Página de erro',
+        loadComponent: () => import('./pages/errorPage/component16').then(m => m.Component16)
     }
 ];
